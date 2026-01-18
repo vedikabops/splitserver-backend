@@ -10,10 +10,20 @@ app.use(cors());
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      //"https://your-app-name.vercel.app"
+    ], 
     methods: ["GET", "POST"]
   }
 });
+
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    //"https://your-app-name.vercel.app" 
+  ]
+}));
 
 // Store room state and users in memory
 const roomState = new Map();
