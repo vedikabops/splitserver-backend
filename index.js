@@ -71,13 +71,6 @@ io.on('connection', (socket) => {
   socket.on('load-video', (data) => {
     const { roomId, videoUrl } = data;
     console.log(`Loading video in room ${roomId}: ${videoUrl}`);
-
-    // yt url validation
-    const ytRegex = /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/;
-    if (!ytRegex.test(videoUrl)) {
-      socket.emit('error', { message: 'Invalid Youtube URL' });
-      return;
-    }
     
     const state = roomState.get(roomId);
     if (state) {
@@ -85,7 +78,7 @@ io.on('connection', (socket) => {
         ...state,
         videoUrl: videoUrl,
         isPlaying: false,
-        currentTime: 0
+        currentTime: 0  
       });
     } else {
       roomState.set(roomId, {
