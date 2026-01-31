@@ -156,7 +156,7 @@ io.on('connection', (socket) => {
       return;
     }
     if (message.length > 500) {
-      socket.emit('error', { message: 'Message too long(max 500 characters)' });
+      socket.emit('server-error', { message: 'Message too long(max 500 characters)' });
       return;
     }
     
